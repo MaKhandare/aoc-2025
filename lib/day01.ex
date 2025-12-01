@@ -49,10 +49,10 @@ end
 test_input = File.read!("test_input.txt")
 input = File.read!("input.txt")
 
-test_input |> Day01.part1() |> IO.inspect(label: "Part 1, Sample")
-input |> Day01.part1() |> IO.inspect(label: "Part 1")
+IO.puts("--- Part 1 ---")
+test_input |> Day01.part1() |> IO.inspect(label: "Sample")
+input |> Day01.part1() |> IO.inspect(label: "Result")
 
-IO.puts("-----")
-
-test_input |> Day01.part2() |> IO.inspect(label: "Part 2, Sample")
-input |> Day01.part2() |> IO.inspect(label: "Part 2")
+IO.puts("--- Part 2 ---")
+test_input |> Day01.part2() |> IO.inspect(label: "Sample")
+input |> Day01.part2() |> IO.inspect(label: "Result")
