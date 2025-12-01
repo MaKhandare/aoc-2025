@@ -34,6 +34,7 @@ defmodule Day01 do
   defp next_pos(current, "L", amount), do: Integer.mod(current - amount, 100)
   defp next_pos(current, "R", amount), do: Integer.mod(current + amount, 100)
 
+  # there must be a better way?
   defp rotate({start_pos, start_count}, dir, amount) do
     Enum.reduce(1..amount, {start_pos, start_count}, fn _, {pos, count} ->
       new_pos = next_pos(pos, dir, 1)
