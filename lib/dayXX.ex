@@ -18,3 +18,9 @@ input |> DayXX.part1() |> IO.inspect(label: "Result")
 IO.puts("--- Part 2 ---")
 test_input |> DayXX.part2() |> IO.inspect(label: "Sample")
 input |> DayXX.part2() |> IO.inspect(label: "Result")
+
+
+# Benchee.run(%{
+#   :part1 => fn -> DayXX.part1(input) end,
+#   :part2 => fn -> DayXX.part2(input) end
+# })
