@@ -2,14 +2,14 @@ defmodule Day02 do
   def part1(input) do
     input
     |> parse_input()
-    |> Enum.flat_map(&get_invalid_ids/1)
+    |> Enum.flat_map(fn range -> get_invalid_ids(range, &has_repeated_sequence?/1) end)
     |> Enum.sum()
   end
 
   def part2(input) do
     input
     |> parse_input()
-    |> Enum.flat_map(&get_invalid_ids_part2/1)
+    |> Enum.flat_map(fn range -> get_invalid_ids(range, &is_repeating_at_least_twice?/1) end)
     |> Enum.sum()
   end
 
@@ -25,9 +25,9 @@ defmodule Day02 do
     {String.to_integer(from), String.to_integer(to)}
   end
 
-  defp get_invalid_ids({from, to}) do
+  defp get_invalid_ids({from, to}, check_function) do
     from..to
-    |> Enum.filter(&has_repeated_sequence?/1)
+    |> Enum.filter(check_function)
   end
 
   defp has_repeated_sequence?(num) do
@@ -41,11 +41,6 @@ defmodule Day02 do
       {left, right} = String.split_at(str, half_index)
       left == right
     end
-  end
-
-  defp get_invalid_ids_part2({from, to}) do
-    from..to
-    |> Enum.filter(&is_repeating_at_least_twice?/1)
   end
 
   defp is_repeating_at_least_twice?(num) do
