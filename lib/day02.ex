@@ -22,11 +22,11 @@ defmodule Day02 do
 
   defp parse_range(range_str) do
     [from, to] = String.split(range_str, "-", trim: true)
-    {from, to}
+    {String.to_integer(from), String.to_integer(to)}
   end
 
   defp get_invalid_ids({from, to}) do
-    String.to_integer(from)..String.to_integer(to)
+    from..to
     |> Enum.filter(&has_repeated_sequence?/1)
   end
 
@@ -44,7 +44,7 @@ defmodule Day02 do
   end
 
   defp get_invalid_ids_part2({from, to}) do
-    String.to_integer(from)..String.to_integer(to)
+    from..to
     |> Enum.filter(&is_repeating_at_least_twice?/1)
   end
 
