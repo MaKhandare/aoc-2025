@@ -19,9 +19,7 @@ defmodule Day03 do
     removals_allowed = length(digits) - target_length
 
     {stack, _} =
-      Enum.reduce(digits, {[], removals_allowed}, fn digit, acc ->
-        update_stack(acc, digit)
-      end)
+      Enum.reduce(digits, {[], removals_allowed}, &update_stack/2)
 
     stack
     |> Enum.reverse()
@@ -29,11 +27,13 @@ defmodule Day03 do
     |> Integer.undigits()
   end
 
-  defp update_stack({[top | rest], removals}, digit) when removals > 0 and digit > top do
-    update_stack({rest, removals - 1}, digit)
+  defp update_stack(digit, {[], removals}), do: {[digit], removals}
+
+  defp update_stack(digit, {[top | rest], removals}) when removals > 0 and digit > top do
+    update_stack(digit, {rest, removals - 1})
   end
 
-  defp update_stack({stack, removals}, digit) do
+  defp update_stack(digit, {stack, removals}) do
     {[digit | stack], removals}
   end
 end
