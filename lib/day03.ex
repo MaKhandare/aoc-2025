@@ -43,10 +43,7 @@ defmodule Day03 do
   end
 
   defp get_max_joltage(line, target_length) do
-    digits =
-      line
-      |> String.to_charlist()
-      |> Enum.map(&(&1 - ?0))
+    digits = for <<byte <- line>>, byte, do: byte - ?0
 
     removals_allowed = length(digits) - target_length
 
