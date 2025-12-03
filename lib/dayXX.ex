@@ -8,17 +8,16 @@ defmodule DayXX do
   end
 end
 
-test_input = File.read!("test_input.txt")
-input = File.read!("input.txt")
+sample_input = File.read!("inputs/DayXX_sample_input.txt")
+input = File.read!("inputs/DayXX_input.txt")
 
 IO.puts("--- Part 1 ---")
-test_input |> DayXX.part1() |> IO.inspect(label: "Sample")
+sample_input |> DayXX.part1() |> IO.inspect(label: "Sample")
 input |> DayXX.part1() |> IO.inspect(label: "Result")
 
 IO.puts("--- Part 2 ---")
-test_input |> DayXX.part2() |> IO.inspect(label: "Sample")
+sample_input |> DayXX.part2() |> IO.inspect(label: "Sample")
 input |> DayXX.part2() |> IO.inspect(label: "Result")
-
 
 # Benchee.run(%{
 #   :part1 => fn -> DayXX.part1(input) end,
