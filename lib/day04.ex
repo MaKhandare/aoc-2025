@@ -27,21 +27,25 @@ defmodule Day04 do
     end
   end
 
-  # TODO: something better here? revisit someday
-  # binary comprehension maybe
   defp build_grid(input) do
-    input
-    |> String.split("\n", trim: true)
-    |> Enum.with_index()
-    |> Enum.reduce(MapSet.new(), fn {line, row}, acc ->
-      line
-      |> String.graphemes()
-      |> Enum.with_index()
-      |> Enum.reduce(acc, fn
-        {"@", col}, set -> MapSet.put(set, {row, col})
-        _, set -> set
-      end)
-    end)
+    parse_grid(input, 0, 0, MapSet.new())
+  end
+
+  defp parse_grid(<<_>>, _row, _col, acc), do: acc
+
+  # new line. increment row
+  defp parse_grid(<<?\n, rest::binary>>, row, _col, acc) do
+    parse_grid(rest, row + 1, 0, acc)
+  end
+
+  # found roll. add to mapset, inc col
+  defp parse_grid(<<?@, rest::binary>>, row, col, acc) do
+    parse_grid(rest, row, col + 1, MapSet.put(acc, {row, col}))
+  end
+
+  # uninteresting char. inc col
+  defp parse_grid(<<_char, rest::binary>>, row, col, acc) do
+    parse_grid(rest, row, col + 1, acc)
   end
 
   defp is_accessible?(grid, coord) do
