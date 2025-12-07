@@ -2,13 +2,17 @@ defmodule Day04 do
   @offsets for x <- -1..1, y <- -1..1, not (x == 0 and y == 0), do: {x, y}
 
   def part1(input) do
-    grid = build_grid(input)
-    Enum.count(grid, fn coord -> is_accessible?(grid, coord) end)
+    input
+    |> build_grid()
+    |> then(fn grid ->
+      Enum.count(grid, fn coord -> is_accessible?(grid, coord) end)
+    end)
   end
 
   def part2(input) do
-    grid = build_grid(input)
-    remove_rolls(grid, 0)
+    input
+    |> build_grid()
+    |> remove_rolls(0)
   end
 
   defp remove_rolls(grid, count) do
